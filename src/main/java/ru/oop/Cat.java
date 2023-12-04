@@ -6,8 +6,7 @@ public class Cat {
     private String name;
 
     public String sound() {
-        String voice = "may-may";
-        return voice;
+        return "may-may";
     }
 
     public void show() {
