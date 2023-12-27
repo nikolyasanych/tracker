@@ -1,6 +1,7 @@
 package ru.tracker;
-
+import java.time.LocalDateTime;
 public class Item {
+    private LocalDateTime created = LocalDateTime.now();
     private int id;
     private String name;
 
@@ -14,6 +15,10 @@ public class Item {
     public Item(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public LocalDateTime getLocalDateTime() {
+        return created;
     }
 
     public int getId() {
