@@ -1,9 +1,11 @@
 package ru.pojo;
 
+import java.time.LocalDateTime;
+
 public class Student {
     private String fullName;
     private int group;
-    private String created;
+    private LocalDateTime created;
 
     public String getFullName() {
         return fullName;
@@ -21,11 +23,11 @@ public class Student {
         this.group = group;
     }
 
-    public String getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(String created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 }
