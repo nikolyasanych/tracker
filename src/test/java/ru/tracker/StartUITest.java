@@ -54,5 +54,115 @@ class StartUITest {
         assertThat(tracker.findById(item.getId())).isNull();
     }
 
+    @Test
+    void whenReplaceItemTestOutputIsSuccessfully() {
+        Output output = new StubOutput();
+        Tracker tracker = new Tracker();
+        Item one = tracker.add(new Item("test1"));
+        String replaceName = "New Test Name";
+        Input input = new MockInput(
+                new String[] {"0", String.valueOf(one.getId()), replaceName, "1"}
+        );
+        UserAction[] actions = new UserAction[]{
+                new ReplaceAction(output),
+                new ExitAction(output)
+        };
+        new StartUI(output).init(input, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(output.toString()).isEqualTo(
+                "Меню:" + ln
+                        + "0. Редактирование заявки" + ln
+                        + "1. Завершить программу" + ln
+                        + "Заявка изменена успешно." + ln
+                        + "Меню:" + ln
+                        + "0. Редактирование заявки" + ln
+                        + "1. Завершить программу" + ln
+                        + "Завершение программы" + ln
+        );
+    }
 
+    @Test
+    void whenFindAllActionTestOutputIsSuccessfully() {
+        Output output = new StubOutput();
+        Tracker tracker = new Tracker();
+        Item one = tracker.add(new Item("test1"));
+        Item two = tracker.add(new Item("test2"));
+        Input input = new MockInput(
+                new String[] {"0", "1"}
+        );
+        UserAction[] actions = new UserAction[]{
+                new FindAllAction(output),
+                new ExitAction(output)
+        };
+        new StartUI(output).init(input, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(output.toString()).isEqualTo(
+                "Меню:" + ln
+                        + "0. Вывод всех заявок" + ln
+                        + "1. Завершить программу" + ln
+                        + one + ln
+                        + two + ln
+                        + "Меню:" + ln
+                        + "0. Вывод всех заявок" + ln
+                        + "1. Завершить программу" + ln
+                        + "Завершение программы" + ln
+        );
+    }
+
+    @Test
+    void whenFindByNameActionTestOutputIsSuccessfully() {
+        Output output = new StubOutput();
+        Tracker tracker = new Tracker();
+        String name = "test1";
+        Item one = tracker.add(new Item(name));
+        Item two = tracker.add(new Item(name));
+        tracker.add(new Item("test3"));
+        Input input = new MockInput(
+                new String[] {"0", name, "1"}
+        );
+        UserAction[] actions = new UserAction[]{
+                new FindByNameAction(output),
+                new ExitAction(output)
+        };
+        new StartUI(output).init(input, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(output.toString()).isEqualTo(
+                "Меню:" + ln
+                        + "0. Вывод заявок по имени" + ln
+                        + "1. Завершить программу" + ln
+                        + one + ln
+                        + two + ln
+                        + "Меню:" + ln
+                        + "0. Вывод заявок по имени" + ln
+                        + "1. Завершить программу" + ln
+                        + "Завершение программы" + ln
+        );
+    }
+
+    @Test
+    void whenFindByIdActionTestOutputIsSuccessfully() {
+        Output output = new StubOutput();
+        Tracker tracker = new Tracker();
+        Item one = tracker.add(new Item("Test1"));
+        tracker.add(new Item("Test2"));
+        Input input = new MockInput(
+                new String[] {"0", String.valueOf(one.getId()), "1"}
+        );
+        UserAction[] actions = new UserAction[]{
+                new FindByIdAction(output),
+                new ExitAction(output)
+        };
+        new StartUI(output).init(input, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(output.toString()).isEqualTo(
+                "Меню:" + ln
+                        + "0. Вывод заявки по id" + ln
+                        + "1. Завершить программу" + ln
+                        + one + ln
+                        + "Меню:" + ln
+                        + "0. Вывод заявки по id" + ln
+                        + "1. Завершить программу" + ln
+                        + "Завершение программы" + ln
+        );
+    }
 }
