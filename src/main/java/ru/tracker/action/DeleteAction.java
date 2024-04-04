@@ -1,4 +1,9 @@
-package ru.tracker;
+package ru.tracker.action;
+
+import ru.tracker.Input;
+import ru.tracker.Item;
+import ru.tracker.Output;
+import ru.tracker.Tracker;
 
 public class DeleteAction implements UserAction {
     private final Output output;

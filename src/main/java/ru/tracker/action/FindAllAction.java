@@ -1,4 +1,9 @@
-package ru.tracker;
+package ru.tracker.action;
+
+import ru.tracker.Input;
+import ru.tracker.Item;
+import ru.tracker.Output;
+import ru.tracker.Tracker;
 
 public class FindAllAction implements UserAction {
     private final Output output;
