@@ -5,10 +5,10 @@ import ru.tracker.Item;
 import ru.tracker.Output;
 import ru.tracker.Tracker;
 
-public class FindByIdAction implements UserAction {
+public class FindById implements UserAction {
     private final Output output;
 
-    public FindByIdAction(Output output) {
+    public FindById(Output output) {
         this.output = output;
     }
 

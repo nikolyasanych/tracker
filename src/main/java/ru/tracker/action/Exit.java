@@ -4,10 +4,10 @@ import ru.tracker.Input;
 import ru.tracker.Output;
 import ru.tracker.Tracker;
 
-public class ExitAction implements UserAction {
+public class Exit implements UserAction {
     private final Output output;
 
-    public ExitAction(Output output) {
+    public Exit(Output output) {
         this.output = output;
     }
 

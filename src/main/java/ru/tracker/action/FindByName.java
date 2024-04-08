@@ -5,27 +5,28 @@ import ru.tracker.Item;
 import ru.tracker.Output;
 import ru.tracker.Tracker;
 
-public class FindAllAction implements UserAction {
+public class FindByName implements UserAction {
     private final Output output;
 
-    public FindAllAction(Output output) {
+    public FindByName(Output output) {
         this.output = output;
     }
 
     @Override
     public String name() {
-        return "Вывод всех заявок";
+        return "Вывод заявок по имени";
     }
 
     @Override
     public boolean execute(Input input, Tracker tracker) {
-        Item[] items = tracker.findAll();
+        String name = input.askStr("Введите имя: ");
+        Item[] items = tracker.findByName(name);
         if (items.length > 0) {
             for (Item item : items) {
                 output.println(item);
             }
         } else {
-            output.println("Хранилище еще не содержит заявок");
+            output.println("Заявки с именем: " + name + " не найдены.");
         }
         return true;
     }

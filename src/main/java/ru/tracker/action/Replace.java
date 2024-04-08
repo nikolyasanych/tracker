@@ -5,28 +5,27 @@ import ru.tracker.Item;
 import ru.tracker.Output;
 import ru.tracker.Tracker;
 
-public class FindByNameAction implements UserAction {
+public class Replace implements UserAction {
     private final Output output;
 
-    public FindByNameAction(Output output) {
+    public Replace(Output output) {
         this.output = output;
     }
 
     @Override
     public String name() {
-        return "Вывод заявок по имени";
+        return "Редактирование заявки";
     }
 
     @Override
     public boolean execute(Input input, Tracker tracker) {
+        int id = input.askInt("Введите id: ");
         String name = input.askStr("Введите имя: ");
-        Item[] items = tracker.findByName(name);
-        if (items.length > 0) {
-            for (Item item : items) {
-                output.println(item);
-            }
+        Item item = new Item(name);
+        if (tracker.replace(id, item)) {
+            output.println("Заявка изменена успешно.");
         } else {
-            output.println("Заявки с именем: " + name + " не найдены.");
+            output.println("Ошибка замены заявки.");
         }
         return true;
     }

@@ -5,28 +5,26 @@ import ru.tracker.Item;
 import ru.tracker.Output;
 import ru.tracker.Tracker;
 
-public class ReplaceAction implements UserAction {
+public class Create implements UserAction {
     private final Output output;
 
-    public ReplaceAction(Output output) {
+    public Create(Output output) {
         this.output = output;
     }
 
     @Override
     public String name() {
-        return "Редактирование заявки";
+        return "Добавить новую заявку";
     }
 
     @Override
     public boolean execute(Input input, Tracker tracker) {
-        int id = input.askInt("Введите id: ");
+        output.println("=== Создание новой заявки ===");
         String name = input.askStr("Введите имя: ");
         Item item = new Item(name);
-        if (tracker.replace(id, item)) {
-            output.println("Заявка изменена успешно.");
-        } else {
-            output.println("Ошибка замены заявки.");
-        }
+        tracker.add(item);
+        output.println("Добавленная заявка: " + item);
         return true;
     }
+
 }
