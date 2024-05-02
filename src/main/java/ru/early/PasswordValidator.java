@@ -64,29 +64,11 @@ public class PasswordValidator {
             throw new IllegalArgumentException("Password should contain at least one special symbol");
         }
         String passLower = password.toLowerCase();
-        if (passLower.contains("qwerty") || passLower.contains("12345")
-                || passLower.contains("password") || passLower.contains("admin")
-                || passLower.contains("user")) {
-            throw new IllegalArgumentException("Password shouldn't contain substrings: qwerty, 12345, password, admin, user");
+        for (String s : FORBIDDEN) {
+            if (passLower.contains(s)) {
+                throw new IllegalArgumentException("Password shouldn't contain substrings: qwerty, 12345, password, admin, user");
+            }
         }
         return password;
-    }
-
-    public static boolean find(String text, String pattern) {
-        char[] textCh = text.toCharArray();
-        char[] patternCh = pattern.toCharArray();
-        int t = 0;
-        int last = patternCh.length - 1;
-        while (t < text.length() - last) {
-            int p = 0;
-            while (p <= last && (Character.compare(textCh[ t + p ], Character.toLowerCase(patternCh[p])) == 0 || Character.compare(textCh[ t + p ], Character.toUpperCase(patternCh[p])) == 0)) {
-                p++;
-            }
-            if (p == pattern.length()) {
-                return true;
-            }
-            t++;
-        }
-        return false;
     }
 }
