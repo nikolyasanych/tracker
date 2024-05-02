@@ -63,9 +63,10 @@ public class PasswordValidator {
         if (!isSymbol) {
             throw new IllegalArgumentException("Password should contain at least one special symbol");
         }
-        if (find(password, "qwerty") || find(password, "12345")
-                || find(password, "password") || find(password, "admin")
-                || find(password, "user")) {
+        String passLower = password.toLowerCase();
+        if (passLower.contains("qwerty") || passLower.contains("12345")
+                || passLower.contains("password") || passLower.contains("admin")
+                || passLower.contains("user")) {
             throw new IllegalArgumentException("Password shouldn't contain substrings: qwerty, 12345, password, admin, user");
         }
         return password;
