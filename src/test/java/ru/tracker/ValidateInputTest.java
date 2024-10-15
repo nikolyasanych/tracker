@@ -1,14 +1,16 @@
 package ru.tracker;
 
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 class ValidateInputTest {
     @Test
     void whenInvalidInput() {
-        Output output = new StubOutput();
+        Output output = new MockOutput();
         Input in = new MockInput(
-                new String[] {"one", "1"}
-        );
+                List.of("one", "1"));
         ValidateInput input = new ValidateInput(output, in);
         int selected = input.askInt("Enter menu:");
         assertThat(selected).isEqualTo(1);
@@ -16,9 +18,9 @@ class ValidateInputTest {
 
     @Test
     void whenOneIntInvalidInput() {
-        Output output = new StubOutput();
+        Output output = new MockOutput();
         Input in = new MockInput(
-                new String[] {"5"}
+                List.of("5")
         );
         ValidateInput input = new ValidateInput(output, in);
         int selected = input.askInt("Enter menu:");
@@ -27,9 +29,9 @@ class ValidateInputTest {
 
     @Test
     void whenSomeInvalidInput() {
-        Output output = new StubOutput();
+        Output output = new MockOutput();
         Input in = new MockInput(
-                new String[] {"1", "2", "3"}
+                List.of("1", "2", "3")
         );
         ValidateInput input = new ValidateInput(output, in);
         int selectedOne = input.askInt("Enter menu:");
@@ -42,9 +44,9 @@ class ValidateInputTest {
 
     @Test
     void whenNegativInvalidInput() {
-        Output output = new StubOutput();
+        Output output = new MockOutput();
         Input in = new MockInput(
-                new String[] {"-1"}
+                List.of("-1")
         );
         ValidateInput input = new ValidateInput(output, in);
         int selected = input.askInt("Enter menu:");

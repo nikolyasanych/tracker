@@ -1,4 +1,4 @@
-package ru.tracker;
+package ru.oop;
 
 public class UserStore {
     public static void main(String[] args) {

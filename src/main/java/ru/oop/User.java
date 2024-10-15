@@ -1,4 +1,4 @@
-package ru.tracker;
+package ru.oop;
 
 public class User {
     private int id;
