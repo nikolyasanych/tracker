@@ -27,5 +27,4 @@ public class AppleStore {
         }
         return customer.name();
     }
-
 }
