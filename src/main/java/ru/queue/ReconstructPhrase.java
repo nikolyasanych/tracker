@@ -1,7 +1,7 @@
 package ru.queue;
 
-import java.util.Deque;
-import java.util.Iterator;
+import java.security.SecureRandom;
+import java.util.*;
 
 public class ReconstructPhrase {
     private final Deque<Character> descendingElements;
