@@ -16,87 +16,62 @@ public class AnalyzeByMap {
     }
 
     public static List<Label> averageScoreByPupil(List<Pupil> pupils) {
-        int count = 0;
-        int subCount = 0;
-        double result;
-        String name;
         List<Label> labelList = new ArrayList<>();
         for (Pupil pupil : pupils) {
-            name = pupil.name();
-            for (Subject subject : pupil.subjects()) {
-                subCount += subject.score();
-                count++;
+            int subjectScore = 0;
+            List<Subject> subjectList = pupil.subjects();
+            for (Subject subject : subjectList) {
+                subjectScore += subject.score();
             }
-            result = (double) subCount / count;
-            Label label = new Label(name, result);
-            labelList.add(label);
-            subCount = 0;
-            count = 0;
+            double averageScore = (double) subjectScore / subjectList.size();
+            labelList.add(new Label(pupil.name(), averageScore));
         }
         return labelList;
     }
 
     public static List<Label> averageScoreBySubject(List<Pupil> pupils) {
-        Map<String, Integer> map = new LinkedHashMap<>();
-        String name;
-        int score;
-        int count = 0;
+        Map<String, Integer> map = getSubjectScore(pupils);
         List<Label> labelList = new ArrayList<>();
-        for (Pupil pupil : pupils) {
-            count++;
-            for (Subject subject : pupil.subjects()) {
-                name = subject.name();
-                score = subject.score();
-                if (map.get(name) != null) {
-                    score += map.get(name);
-                }
-                map.put(name, score);
-            }
-        }
         for (String key : map.keySet()) {
-            Label label = new Label(key, (double) map.get(key) / count);
-            labelList.add(label);
+            double result = (double) map.get(key) / pupils.size();
+            labelList.add(new Label(key, result));
         }
         return labelList;
     }
 
     public static Label bestStudent(List<Pupil> pupils) {
-        int score = 0;
-        String name;
         List<Label> labelList = new ArrayList<>();
         for (Pupil pupil : pupils) {
-            name = pupil.name();
+            int score = 0;
             for (Subject subject : pupil.subjects()) {
                 score += subject.score();
             }
-            Label label = new Label(name, score);
-            labelList.add(label);
-            score = 0;
+            labelList.add(new Label(pupil.name(), score));
         }
         labelList.sort(Comparator.naturalOrder());
         return labelList.get(labelList.size() - 1);
     }
 
     public static Label bestSubject(List<Pupil> pupils) {
-        Map<String, Integer> map = new LinkedHashMap<>();
-        String name;
-        int score;
+        Map<String, Integer> map = getSubjectScore(pupils);
         List<Label> labelList = new ArrayList<>();
-        for (Pupil pupil : pupils) {
-            for (Subject subject : pupil.subjects()) {
-                name = subject.name();
-                score = subject.score();
-                if (map.get(name) != null) {
-                    score += map.get(name);
-                }
-                map.put(name, score);
-            }
-        }
         for (String key : map.keySet()) {
-            Label label = new Label(key, map.get(key));
-            labelList.add(label);
+            labelList.add(new Label(key, map.get(key)));
         }
         labelList.sort(Comparator.naturalOrder());
         return labelList.get(labelList.size() - 1);
+    }
+
+    private static Map<String, Integer> getSubjectScore(List<Pupil> pupils) {
+        Map<String, Integer> map = new LinkedHashMap<>();
+        for (Pupil pupil : pupils) {
+            for (Subject subject : pupil.subjects()) {
+                String name = subject.name();
+                int score = subject.score();
+                score += map.getOrDefault(name, 0);
+                map.put(name, score);
+            }
+        }
+        return map;
     }
 }
