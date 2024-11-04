@@ -11,19 +11,19 @@ class ItemDescByNameTest {
 
     @Test
     void compare() {
-        Item Ivan = new Item("Ivan");
-        Item Nikolai = new Item("Nikolai");
-        Item Dmitriy = new Item("Dmitriy");
+        Item ivan = new Item("Ivan");
+        Item nikolai = new Item("Nikolai");
+        Item dmitriy = new Item("Dmitriy");
         List<Item> items = Arrays.asList(
-                Ivan,
-                Nikolai,
-                Dmitriy
+                ivan,
+                nikolai,
+                dmitriy
         );
         items.sort(new ItemDescByName());
         List<Item> expected = Arrays.asList(
-                Nikolai,
-                Ivan,
-                Dmitriy
+                nikolai,
+                ivan,
+                dmitriy
         );
         assertThat(items).isEqualTo(expected);
     }

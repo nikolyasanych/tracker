@@ -11,19 +11,19 @@ class ItemAscByNameTest {
 
     @Test
     void compare() {
-        Item Ivan = new Item("Ivan");
-        Item Nikolai = new Item("Nikolai");
-        Item Dmitriy = new Item("Dmitriy");
+        Item ivan = new Item("Ivan");
+        Item nikolai = new Item("Nikolai");
+        Item dmitriy = new Item("Dmitriy");
         List<Item> items = Arrays.asList(
-                Ivan,
-                Nikolai,
-                Dmitriy
+                ivan,
+                nikolai,
+                dmitriy
                 );
         items.sort(new ItemAscByName());
         List<Item> expected = Arrays.asList(
-                Dmitriy,
-                Ivan,
-                Nikolai
+                dmitriy,
+                ivan,
+                nikolai
         );
         assertThat(items.toString()).isEqualTo(expected.toString());
     }
