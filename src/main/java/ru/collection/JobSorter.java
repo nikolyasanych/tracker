@@ -2,6 +2,7 @@ package ru.collection;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class JobSorter {
@@ -14,6 +15,10 @@ public class JobSorter {
         System.out.println(jobs);
         Collections.sort(jobs);
         System.out.println(jobs);
+        Comparator<Job> combine = new JobDescByNameLength()
+                .thenComparing(new JobDescByName())
+                .thenComparing(new JobDescByPriority());
+        jobs.sort(combine);
     }
 }
 
