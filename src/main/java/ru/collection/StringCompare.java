@@ -11,13 +11,10 @@ public class StringCompare implements Comparator<String> {
             if (result != 0) {
                 return result;
             }
-            if (left.length() < right.length() && i == minSize - 1) {
-                return -1;
-            }
-            if (left.length() > right.length() && i == minSize - 1) {
-                return 1;
-            }
         }
-        return 0;
+        if (left.length() == right.length()) {
+            return 0;
+        }
+        return left.length() < right.length() ? -1 : 1;
     }
 }
