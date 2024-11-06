@@ -58,7 +58,7 @@ class JobTest {
     void whenJobAscByPriorityAndName() {
         Comparator<Job> comparator = new JobAscByPriority().thenComparing(new JobAscByName());
         int result = comparator.compare(
-                new Job("Nik" , 1),
+                new Job("Nik", 1),
                 new Job("Else", 2)
         );
         assertThat(result).isLessThan(0);
