@@ -2,33 +2,40 @@ package ru.search;
 
 import java.util.LinkedList;
 
+/**
+ * Класс описывает работу простейшей очереди по приоритету, которая работает
+ * по принципу FIFO (first in - first out)
+ * @author Nikolay
+ * @version 1.0
+ */
 public class PriorityQueue {
-    public LinkedList<Task> getTasks() {
-        return tasks;
-    }
-
+    /**
+     * Хранение задания осуществляется в коллекции типа LinkedList
+     */
     private LinkedList<Task> tasks = new LinkedList<>();
 
     /**
-     * Метод должен вставлять в нужную позицию элемент.
-     * Позиция определяется по полю приоритета.
-     * Для вставки использовать add(int index, E value)
-     * @param task задача
+     * Метод принимает на вход заявку и добавляет ее в очередь.
+     * Если встречаются 2 задания с одинаковым приоритетом, то в очереди
+     * они распределяются по принципу FIFO.
+     * @param task задача которая добавляется в очередь
      */
     public void put(Task task) {
-        int index = 0;
-        int mainPriority = task.getPriority();
-        for (Task element : tasks) {
-            if (mainPriority < element.getPriority()) {
+        int i = 0;
+        for (Task current : tasks) {
+            if (task.getPriority() < current.getPriority()) {
                 break;
             }
-            index++;
+            i++;
         }
-        this.tasks.add(index, task);
+        tasks.add(i, task);
     }
 
+    /**
+     * Метод позволяет получить первую задачу в очереди
+     * @return возвращает задачу из головы очереди или null если очередь пуста
+     */
     public Task take() {
-        return tasks.poll();
+        return this.tasks.poll();
     }
-
 }
