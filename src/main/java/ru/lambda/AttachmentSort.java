@@ -27,5 +27,7 @@ public class AttachmentSort {
         };
         attachments.sort(comparatorByName);
         System.out.println(attachments);
+        Comparator<String> comparatorText = (left, right) -> left.compareTo(right);
+        Comparator<String> comparatorDescSize = (left, right) -> Integer.compare(right.length(), left.length());
     }
 }
